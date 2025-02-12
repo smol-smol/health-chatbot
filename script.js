@@ -8,7 +8,7 @@ function sendMessage() {
     const userMessage = userInput.value.trim(); // Get user message
 
     if (userMessage !== "") {
-        // Add user message to the chat box
+        // Add user message to the chat box (right side, blue bubble)
         chatBox.innerHTML += `<p class="user-message">${userMessage}</p>`;
         userInput.value = ""; // Clear the input field
 
