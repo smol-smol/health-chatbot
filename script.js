@@ -3,16 +3,16 @@ const userInput = document.getElementById("user-input");
 const sendButton = document.getElementById("send-btn");
 const chatBox = document.getElementById("chat-box");
 
-// Function to send the user message and bot reply
+// Function to send user message and bot reply
 function sendMessage() {
-    const userMessage = userInput.value.trim(); // Get user message
+    const userMessage = userInput.value.trim();
 
     if (userMessage !== "") {
-        // Add user message to the chat box (right side, blue bubble)
+        // Add user message to chat
         chatBox.innerHTML += `<p class="user-message">${userMessage}</p>`;
-        userInput.value = ""; // Clear the input field
+        userInput.value = ""; // Clear input field
 
-        // Scroll chat box to the bottom
+        // Scroll to bottom
         chatBox.scrollTop = chatBox.scrollHeight;
 
         // Simulate bot's response after a short delay
@@ -20,13 +20,13 @@ function sendMessage() {
             const botReply = getBotReply(userMessage);
             chatBox.innerHTML += `<p class="bot-message">${botReply}</p>`;
 
-            // Scroll chat box to the bottom
+            // Scroll to bottom
             chatBox.scrollTop = chatBox.scrollHeight;
-        }, 1000); // 1 second delay for bot reply
+        }, 1000);
     }
 }
 
-// Function to generate bot's response based on user input
+// Function to generate bot's response
 function getBotReply(userMessage) {
     const message = userMessage.toLowerCase();
 
@@ -41,10 +41,10 @@ function getBotReply(userMessage) {
     }
 }
 
-// Add event listener to the send button
+// Event listener for send button
 sendButton.addEventListener("click", sendMessage);
 
-// Optional: Allow pressing 'Enter' to send the message
+// Allow 'Enter' key to send message
 userInput.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
         sendMessage();
