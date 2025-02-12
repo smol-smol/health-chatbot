@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Chatbot</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-   <body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="w-full max-w-lg bg-white p-6 rounded-lg shadow-lg">
-        <h1 class="text-xl font-bold text-center text-blue-600">Health Chatbot</h1>
-        <div id="chatbox" class="mt-4 h-80 overflow-y-auto border p-3 rounded-md bg-gray-50"></div>
-        <div class="mt-4 flex">
-            <input id="userInput" type="text" placeholder="Type your message..." class="flex-1 p-2 border rounded-l-md">
-            <button onclick="sendMessage()" class="bg-blue-600 text-white px-4 py-2 rounded-r-md">Send</button>
+    <div id="chat-container">
+        <div id="chat-box"></div>
+        <div id="input-container">
+            <input type="text" id="user-input" placeholder="Type your message...">
+            <button id="send-btn">Send</button>
         </div>
     </div>
 
