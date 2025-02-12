@@ -1,52 +1,39 @@
-// Select the necessary elements
-const userInput = document.getElementById("user-input");
-const sendButton = document.getElementById("send-btn");
-const chatBox = document.getElementById("chat-box");
+document.addEventListener("DOMContentLoaded", () => {
+    const userInput = document.getElementById("user-input");
+    const sendButton = document.getElementById("send-btn");
+    const chatBox = document.getElementById("chat-box");
 
-// Function to send user message and bot reply
-function sendMessage() {
-    const userMessage = userInput.value.trim();
+    function sendMessage() {
+        const userMessage = userInput.value.trim();
+        if (userMessage !== "") {
+            addMessage(userMessage, "user");
+            userInput.value = "";
 
-    if (userMessage !== "") {
-        // Add user message to chat
-        chatBox.innerHTML += `<p class="user-message">${userMessage}</p>`;
-        userInput.value = ""; // Clear input field
+            setTimeout(() => {
+                const botReply = getBotReply(userMessage);
+                addMessage(botReply, "bot");
+            }, 1000);
+        }
+    }
 
-        // Scroll to bottom
+    function addMessage(message, sender) {
+        const messageDiv = document.createElement("div");
+        messageDiv.classList.add(sender === "user" ? "user-message" : "bot-message");
+        messageDiv.textContent = message;
+        chatBox.appendChild(messageDiv);
         chatBox.scrollTop = chatBox.scrollHeight;
-
-        // Simulate bot's response after a short delay
-        setTimeout(() => {
-            const botReply = getBotReply(userMessage);
-            chatBox.innerHTML += `<p class="bot-message">${botReply}</p>`;
-
-            // Scroll to bottom
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }, 1000);
     }
-}
 
-// Function to generate bot's response
-function getBotReply(userMessage) {
-    const message = userMessage.toLowerCase();
-
-    if (message.includes("hello") || message.includes("hi")) {
-        return "Hello! How can I help you with your health today?";
-    } else if (message.includes("exercise") || message.includes("workout")) {
-        return "Exercise is key to staying healthy! Try some simple yoga or stretching.";
-    } else if (message.includes("diet") || message.includes("food")) {
-        return "A balanced diet is important! Make sure to include fruits, veggies, and protein in your meals.";
-    } else {
-        return "I’m not sure about that. Could you ask something else?";
+    function getBotReply(userMessage) {
+        const msg = userMessage.toLowerCase();
+        if (msg.includes("hi") || msg.includes("hello")) return "💖 Hello! How can I assist you today?";
+        if (msg.includes("exercise")) return "🏋️‍♀️ Exercise is great! Try some yoga or a quick workout.";
+        if (msg.includes("diet")) return "🥗 A balanced diet is key! Eat more greens & proteins.";
+        return "🤔 I'm still learning! Ask me another health-related question.";
     }
-}
 
-// Event listener for send button
-sendButton.addEventListener("click", sendMessage);
-
-// Allow 'Enter' key to send message
-userInput.addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-        sendMessage();
-    }
+    sendButton.addEventListener("click", sendMessage);
+    userInput.addEventListener("keypress", event => {
+        if (event.key === "Enter") sendMessage();
+    });
 });
